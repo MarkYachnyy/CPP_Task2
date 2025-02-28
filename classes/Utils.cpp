@@ -1,7 +1,7 @@
 #include "Direction.h"
 #include "Point.h"
 
-int normalizedInt(int a) {
+inline int normalizedInt(int a) {
     if (a > 0) {
         return 1;
     }
@@ -11,7 +11,7 @@ int normalizedInt(int a) {
     return 0;
 }
 
-Point* getIncrementPoint(Direction direction) {
+inline Point* getIncrementPoint(Direction direction) {
     switch (direction) {
         case Direction::Up:{
             return new Point(0, -1);

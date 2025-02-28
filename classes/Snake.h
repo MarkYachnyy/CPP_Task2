@@ -17,11 +17,12 @@ public:
     Direction direction;
     void move();
     Point* head();
+    bool containsPoint(int x, int y);
 private:
     int growthSpeed;
     int movesToGrowth;
     int invisibleMoves;
-    void moveHeadForward();
+    void moveHead();
     void moveTail();
 };
 

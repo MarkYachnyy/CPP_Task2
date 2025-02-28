@@ -14,4 +14,5 @@ add_executable(Task2 main.cpp
         classes/Field.cpp
         classes/Snake.cpp
         classes/Utils.cpp
-        classes/Direction.h)
+        classes/Direction.h
+        classes/Point.cpp)
