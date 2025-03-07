@@ -5,7 +5,7 @@
 #ifndef ARTIFACT_H
 #define ARTIFACT_H
 
-#include "../Snake.h"
+#include "../game/Snake.h"
 
 class Artifact {
 public:

@@ -1,10 +1,24 @@
 #include <iostream>
+#include <thread>
+#include <cstdlib>
+#include <Windows.h>
 
-#include "classes/Field.h"
+#include "classes/game/Field.h"
+#include "classes/game/Game.h"
+
 
 int main() {
-    Field* f = new Field(10, 10);
-    std::cout << "Nigga";
-    return 0;
+    SetConsoleOutputCP(CP_UTF8);
+    srand(time(NULL));
+    Game game(20, 20, 0.03, 2, 5);
+    for (int i = 0; i < 1000;i++) {
+        game.tick();
+        std::cout << "\033[H\033[2J";
+        std::cout << game.print() << std::endl;
+        std::flush(std::cout);
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+    }
+
 }
 

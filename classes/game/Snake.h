@@ -6,22 +6,24 @@
 #define SNAKE_H
 #include <vector>
 
-#include "Direction.h"
-#include "Point.h"
+#include "../geometry/Direction.h"
+#include "../geometry/Point.h"
 
 class Snake {
 
 public:
-    Snake(Point& point, Direction direction, int length, int growthSpeed);
-    std::vector<Point*> points;
+    Snake(Point point, Direction direction, int length, int growthSpeed);
     Direction direction;
+
     void move();
-    Point* head();
-    bool containsPoint(int x, int y);
+    Point& head();
+    bool containsPoint(Point& point);
 private:
     int growthSpeed;
     int movesToGrowth;
     int invisibleMoves;
+    std::vector<Point> points;
+
     void moveHead();
     void moveTail();
 };

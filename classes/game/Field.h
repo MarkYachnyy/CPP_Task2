@@ -8,17 +8,17 @@
 #include <vector>
 
 #include "Snake.h"
-#include "artifact/Artifact.h"
 
 class Field {
-private:
-    int width, height;
+    int _width, _height;
 public:
     Field(int width, int height);
-    std::vector<Snake*> snakes;
-    std::vector<Artifact*> artifacts;
-    std::string draw();
-    void step();
+
+    int getWidth() const;
+    int getHeight() const;
+
+    std::vector<Snake> snakes;
+
 };
 
 #endif //FIELD_H
