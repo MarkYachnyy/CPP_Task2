@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "../geometry/Utils.cpp"
+#include "../geometry/Utils.h"
 
 SimpleSurvivorBot::SimpleSurvivorBot(Snake *_snake, Field *field, int visionRange): _snake(_snake), _field(field), _visionRange(visionRange) {
 

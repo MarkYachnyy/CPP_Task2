@@ -1,3 +1,4 @@
+#pragma once
 #include "Direction.h"
 #include "Point.h"
 #include <ctime>
@@ -33,11 +34,11 @@ inline Point getIncrementPoint(Direction direction) {
     }
 }
 
-inline Direction clockWise(Direction direction) {
+inline  Direction clockWise(Direction direction) {
     return Direction((int(direction) + 1) % 4);
 }
 
-inline Direction counterClockWise(Direction direction) {
+inline  Direction counterClockWise(Direction direction) {
     return Direction((int(direction) + 3) % 4);
 }
 

@@ -3,7 +3,8 @@
 
 #include <iostream>
 
-#include "../geometry/Utils.cpp"
+#include "../artifact/Invisible.h"
+#include "../geometry/Utils.h"
 #include "../geometry/Direction.h"
 
 Snake::Snake(Point point, Direction direction, int length, int growthSpeed) {
@@ -32,13 +33,15 @@ void Snake::move() {
         points.insert(points.cbegin(), Point(head().x, head().y));
     }
     moveHead();
-    moveTail();
-    // if (movesToGrowth > 0) {
-    //     moveTail();
-    //     movesToGrowth--;
-    // } else {
-    //     movesToGrowth = growthSpeed;
-    // }
+    if (movesToGrowth > 0) {
+        moveTail();
+        movesToGrowth--;
+    } else {
+        movesToGrowth = growthSpeed;
+    }
+    if (invisibleMoves > 0) {
+        invisibleMoves--;
+    }
 }
 
 void Snake::moveHead() {

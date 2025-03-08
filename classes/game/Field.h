@@ -4,10 +4,10 @@
 
 #ifndef FIELD_H
 #define FIELD_H
-#include <string>
 #include <vector>
 
 #include "Snake.h"
+#include "../artifact/Artifact.cpp"
 
 class Field {
     int _width, _height;
@@ -17,7 +17,9 @@ public:
 
     int getWidth() const;
     int getHeight() const;
+    bool isOccupied(Point& p);
 
+    std::vector<Artifact*> artifacts;
     std::vector<Snake*> snakes;
 
 };
