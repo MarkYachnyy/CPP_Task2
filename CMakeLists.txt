@@ -20,4 +20,5 @@ add_executable(Task2 main.cpp
         classes/game/Game.cpp
         classes/game/Game.h
         classes/player/SimpleSurvivorBot.cpp
-        classes/player/SimpleSurvivorBot.h)
+        classes/player/SimpleSurvivorBot.h
+        classes/player/Player.cpp)

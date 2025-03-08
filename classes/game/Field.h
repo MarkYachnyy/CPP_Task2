@@ -13,11 +13,12 @@ class Field {
     int _width, _height;
 public:
     Field(int width, int height);
+    ~Field();
 
     int getWidth() const;
     int getHeight() const;
 
-    std::vector<Snake> snakes;
+    std::vector<Snake*> snakes;
 
 };
 

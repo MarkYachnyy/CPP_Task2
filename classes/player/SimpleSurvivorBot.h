@@ -4,20 +4,26 @@
 
 #ifndef SIMPLESURVIVORBOT_H
 #define SIMPLESURVIVORBOT_H
+#include "Player.cpp"
 #include "../game/Snake.h"
 #include "../game/Field.h"
 
 
-class SimpleSurvivorBot{
+class SimpleSurvivorBot: public Player{
     int _visionRange;
-    Snake& _snake;
-    Field& _field;
+    Field* _field;
+    Snake* _snake;
 
     int freeSpace(Direction direction);
     bool isAnObstacle(Point& p);
 public:
-    void turn();
-    SimpleSurvivorBot(Snake& snake, Field& field, int visionRange);
+
+    void turn() override;
+    Snake* getSnake() override;
+    Field* getField() override;
+
+    SimpleSurvivorBot(Snake* snake, Field* field, int visionRange);
+    ~SimpleSurvivorBot();
 };
 
 

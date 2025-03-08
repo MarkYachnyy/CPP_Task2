@@ -38,7 +38,7 @@ inline Direction clockWise(Direction direction) {
 }
 
 inline Direction counterClockWise(Direction direction) {
-    return Direction((int(direction) + 7) % 4);
+    return Direction((int(direction) + 3) % 4);
 }
 
 inline int randInt(int min, int max) {
