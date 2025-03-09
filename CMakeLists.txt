@@ -24,4 +24,5 @@ add_executable(Task2 main.cpp
         classes/player/Player.cpp
         classes/artifact/Invisible.cpp
         classes/util/symbols.h
-        classes/artifact/Bomb.cpp)
+        classes/artifact/Bomb.cpp
+        classes/artifact/Slower.cpp)

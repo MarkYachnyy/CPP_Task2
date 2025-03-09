@@ -5,6 +5,7 @@
 #include <string>
 #include "../artifact/Invisible.h"
 #include "../artifact/Bomb.h"
+#include "../artifact/Slower.h"
 #include "../util/symbols.h"
 
 Game::Game(int field_w, int field_h, int artifactSpawnRatePercent, int init_snake_c, int init_snake_l):
@@ -18,7 +19,7 @@ Game::Game(int field_w, int field_h, int artifactSpawnRatePercent, int init_snak
 
     int h = (field_h - init_snake_l) / 2;
     for (int i = 0; i < init_snake_c; ++i) {
-        Snake *s = new Snake({i * field_w / init_snake_c, h}, Direction::Up, 5, 12);
+        Snake *s = new Snake({i * field_w / init_snake_c, h}, Direction::Up, init_snake_l, 10);
         _field.snakes.emplace_back(s);
     }
     for (Snake *snake: _field.snakes) {
@@ -70,17 +71,24 @@ void Game::countCollisions() {
     std::vector<Snake *> snakes_to_kill;
     std::vector<Player *> bots_to_kill;
     for (Player *p: _players) {
-        Snake *ss = p->getSnake();
-        if (ss->head().x < 0 || ss->head().x >= _field.getWidth() ||
-            ss->head().y < 0 || ss->head().y >= _field.getHeight()) {
-            ss->dead = true;
+        Snake *playersSnake = p->getSnake();
+        if (playersSnake->head().x < 0 || playersSnake->head().x >= _field.getWidth() ||
+            playersSnake->head().y < 0 || playersSnake->head().y >= _field.getHeight()) {
+            playersSnake->dead = true;
         }
         for (Snake *s: _field.snakes) {
-            if (s == ss) {
+            if (s == playersSnake) {
+                if (s->containsPoint(s->head()) > 1) {
+                    if (s->invisibleMoves <= 0) {
+                        playersSnake->dead = true;
+                        break;
+                    }
+                }
                 continue;
             }
-            if (s->containsPoint(ss->head())) {
-                ss->dead = true;
+            if (s->containsPoint(playersSnake->head())) {
+                playersSnake->dead = true;
+                break;
             }
         }
     }
@@ -122,7 +130,7 @@ void Game::createRandomArtifact() {
         p = Point(randInt(0, _field.getWidth()), randInt(0, _field.getHeight()));
     } while (_field.isOccupied(p));
     Artifact *artifact;
-    switch (randInt(0, 2)) {
+    switch (randInt(0, 3)) {
         case 0: {
             artifact = new Invisible(p.x, p.y, _invisibleStrength);
             break;
@@ -131,8 +139,11 @@ void Game::createRandomArtifact() {
             artifact = new Bomb(p.x, p.y, _bombRadius);
             break;
         }
+        case 2: {
+            artifact = new Slower(p.x, p.y, _slowerStrength);
+            break;
+        }
         default: {
-            artifact = new Bomb(p.x, p.y, _bombRadius);
             break;
         }
     }
@@ -163,8 +174,10 @@ std::string Game::print() {
                     artifact = true;
                     if (a->getName()=="invisible") {
                         c += CYAN;
-                    } else {
+                    } else if (a->getName()=="bomb"){
                         c += RED;
+                    } else {
+                        c += PURPLE;
                     }
                     break;
                 }

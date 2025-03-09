@@ -10,7 +10,7 @@
 int main() {
     SetConsoleOutputCP(CP_UTF8);
     srand(time(NULL));
-    Game game(10, 10, 10, 2, 3, 20,10,3);
+    Game game(20, 20, 5, 2, 15, 20,2,3);
     for (int i = 0; i < 1000;i++) {
         game.tick();
         std::cout << "\033[H\033[2J";

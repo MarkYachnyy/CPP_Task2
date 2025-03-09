@@ -40,6 +40,7 @@ void SimpleSurvivorBot::turn() {
     Direction dir_right = clockWise(_snake->direction);
     int s_left = freeSpace(dir_left);
     int s_right = freeSpace(dir_right);
+    if (s_left == 0 && s_right == 0) return;
     if (s_right > s_left) {
         _snake->direction = dir_right;
     } else if (s_left > s_right){
@@ -55,9 +56,9 @@ int SimpleSurvivorBot::freeSpace(Direction direction) {
     p.x += inc.x;
     p.y += inc.y;
     int res = 0;
-    int i = _visionRange;
-    while (i > 0 && !(isAnObstacle(p) || _snake->containsPoint(p))) {
-        --i;
+    int i = 1;
+    while (i <= _visionRange && !isAnObstacle(p) && !(_snake->containsPoint(p) && _snake->invisibleMoves <= i)) {
+        i++;
         res++;
         p.x += inc.x;
         p.y += inc.y;
@@ -72,8 +73,12 @@ bool SimpleSurvivorBot::isAnObstacle(Point &p) {
     if (p.y < 0 || p.y >= _field->getHeight()) {
         return true;
     }
-    for (Snake* _snake: _field->snakes) {
-        if (_snake->containsPoint(p)) {
+    for (Snake* s: _field->snakes) {
+        if (s == _snake) continue;
+        if (s->containsPoint(p)) return true;
+    }
+    for (Artifact* a: _field->artifacts) {
+        if (a->getName() == "bomb" && a->getPoint().x == p.x && a->getPoint().y == p.y) {
             return true;
         }
     }

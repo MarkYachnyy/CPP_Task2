@@ -18,7 +18,7 @@ public:
 
     void move();
     Point& head();
-    bool containsPoint(Point& point);
+    int containsPoint(Point& point);
 private:
     int movesToGrowth;
     std::vector<Point> points;

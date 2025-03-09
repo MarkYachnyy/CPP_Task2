@@ -13,8 +13,7 @@ inline std::string BG_CYAN = "\u001B[106m";
 
 inline std::string CYAN = "\u001B[96m";
 inline std::string RED = "\u001B[91m";
-
-
+inline std::string PURPLE = "\u001B[95m";
 
 inline std::string RESET = "\u001B[0m";
 

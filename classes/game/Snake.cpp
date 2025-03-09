@@ -64,18 +64,19 @@ void Snake::moveTail() {
     }
 }
 
-bool Snake::containsPoint(Point& p) {
+int Snake::containsPoint(Point& p) {
     int x = p.x;
     int y = p.y;
+    int res = 0;
     for (int i = 0; i < points.size() - 1; ++i) {
         Point p1 = points.at(i);
         Point p2 = points.at(i+1);
         if (x >= std::min(p1.x, p2.x) && x <= std::max(p1.x, p2.x) && y == p1.y && y == p2.y||
             y >= std::min(p1.y, p2.y) && y <= std::max(p1.y, p2.y) && x == p1.x && x == p2.x){
-            return true;
+            res++;
         }
     }
-    return false;
+    return res;
 }
 
 

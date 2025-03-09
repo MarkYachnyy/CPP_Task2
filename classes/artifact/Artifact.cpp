@@ -14,7 +14,7 @@ public:
     virtual ~Artifact() = default;
 
     virtual void use(Snake* snake){};
-    virtual Point getPoint(){return Point(0,0);}
+    virtual Point getPoint(){return {0,0};}
     virtual int getRadius(){return 0;}
     virtual std::string getName(){return "";}
 };
