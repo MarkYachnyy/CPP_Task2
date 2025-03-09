@@ -14,7 +14,7 @@ add_executable(Task2 main.cpp
         classes/artifact/Invisible.h
         classes/game/Field.cpp
         classes/game/Snake.cpp
-        classes/geometry/Utils.h
+        classes/util/Utils.h
         classes/geometry/Direction.h
         classes/geometry/Point.cpp
         classes/game/Game.cpp
@@ -23,4 +23,5 @@ add_executable(Task2 main.cpp
         classes/player/SimpleSurvivorBot.h
         classes/player/Player.cpp
         classes/artifact/Invisible.cpp
-        classes/artifact/RandomArtifactFactory.h)
+        classes/util/symbols.h
+        classes/artifact/Bomb.cpp)

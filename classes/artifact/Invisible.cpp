@@ -1,10 +1,11 @@
 #include "Invisible.h"
 
-Invisible::Invisible(int x, int y): _point(x, y) {
+Invisible::Invisible(int x, int y, int strength): _point(x, y) {
+    this->_strength = strength;
 }
 
 void Invisible::use(Snake *snake) {
-    snake->invisibleMoves = 20;
+    snake->invisibleMoves = _strength;
 }
 
 Point Invisible::getPoint() {

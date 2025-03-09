@@ -4,7 +4,7 @@
 #include <iostream>
 
 #include "../artifact/Invisible.h"
-#include "../geometry/Utils.h"
+#include "../util/Utils.h"
 #include "../geometry/Direction.h"
 
 Snake::Snake(Point point, Direction direction, int length, int growthSpeed) {
@@ -13,6 +13,8 @@ Snake::Snake(Point point, Direction direction, int length, int growthSpeed) {
     this->growthSpeed = growthSpeed;
     this->invisibleMoves=0;
     this->movesToGrowth = growthSpeed;
+    this->dead = false;
+
     Point tail = Point(point.x, point.y);
     Point inc = getIncrementPoint(direction);
     tail.x -= inc.x * (length - 1);

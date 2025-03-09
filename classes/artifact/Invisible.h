@@ -6,8 +6,9 @@
 
 class Invisible: public Artifact {
     Point _point;
+    int _strength;
 public:
-    Invisible(int x, int y);
+    Invisible(int x, int y, int strength);
     ~Invisible() = default;
 
     void use(Snake* snake) override;
