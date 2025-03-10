@@ -3,7 +3,7 @@
 #define SNAKE_H
 
 #include <vector>
-#include "../geometry/Direction.h"
+#include "../../include/geometry/Direction.h"
 #include "../geometry/Point.h"
 
 class Snake {

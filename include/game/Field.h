@@ -7,7 +7,7 @@
 #include <vector>
 
 #include "Snake.h"
-#include "../artifact/Artifact.cpp"
+#include "../artifact/Artifact.h"
 
 class Field {
     int _width, _height;

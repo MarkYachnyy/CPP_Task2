@@ -4,25 +4,27 @@ project(Task2)
 set(CMAKE_CXX_STANDARD 20)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc")
 
-add_executable(Task2 main.cpp
-        classes/game/Snake.h
-        classes/geometry/Point.h
-        classes/game/Field.h
-        classes/artifact/Artifact.cpp
-        classes/artifact/Bomb.h
-        classes/artifact/Slower.h
-        classes/artifact/Invisible.h
-        classes/game/Field.cpp
-        classes/game/Snake.cpp
-        classes/util/Utils.h
-        classes/geometry/Direction.h
-        classes/geometry/Point.cpp
-        classes/game/Game.cpp
-        classes/game/Game.h
-        classes/player/SimpleSurvivorBot.cpp
-        classes/player/SimpleSurvivorBot.h
-        classes/player/Player.cpp
-        classes/artifact/Invisible.cpp
-        classes/util/symbols.h
-        classes/artifact/Bomb.cpp
-        classes/artifact/Slower.cpp)
+add_executable(Task2 src/main.cpp
+        include/game/Snake.h
+        include/geometry/Point.h
+        include/game/Field.h
+        include/artifact/Artifact.h
+        include/artifact/Bomb.h
+        include/artifact/Slower.h
+        include/artifact/Invisible.h
+        src/game/Field.cpp
+        src/game/Snake.cpp
+        include/util/Utils.h
+        include/geometry/Direction.h
+        src/geometry/Point.cpp
+        src/game/Game.cpp
+        include/game/Game.h
+        src/player/SimpleSurvivorBot.cpp
+        include/player/SimpleSurvivorBot.h
+        include/player/Player.h
+        src/artifact/Invisible.cpp
+        include/util/symbols.h
+        src/artifact/Bomb.cpp
+        src/artifact/Slower.cpp)
+
+include_directories(include)

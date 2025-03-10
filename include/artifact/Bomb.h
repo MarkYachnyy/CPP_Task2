@@ -4,7 +4,7 @@
 
 #ifndef BOMB_H
 #define BOMB_H
-#include "Artifact.cpp"
+#include "Artifact.h"
 
 class Bomb: public Artifact {
     Point _point;

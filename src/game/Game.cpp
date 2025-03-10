@@ -1,12 +1,12 @@
 #include <algorithm>
-#include "Game.h"
-#include "../player/SimpleSurvivorBot.h"
-#include "../util/Utils.h"
+#include "../../include/game/Game.h"
+#include "../../include/player/SimpleSurvivorBot.h"
+#include "../../include/util/Utils.h"
 #include <string>
-#include "../artifact/Invisible.h"
-#include "../artifact/Bomb.h"
-#include "../artifact/Slower.h"
-#include "../util/symbols.h"
+#include "../../include/artifact/Invisible.h"
+#include "../../include/artifact/Bomb.h"
+#include "../../include/artifact/Slower.h"
+#include "../../include/util/symbols.h"
 
 Game::Game(int field_w, int field_h, int artifactSpawnRatePercent, int init_snake_c, int init_snake_l):
     Game(field_w, field_h, artifactSpawnRatePercent, init_snake_c, init_snake_l, 20, 10, 5){
@@ -19,7 +19,7 @@ Game::Game(int field_w, int field_h, int artifactSpawnRatePercent, int init_snak
 
     int h = (field_h - init_snake_l) / 2;
     for (int i = 0; i < init_snake_c; ++i) {
-        Snake *s = new Snake({i * field_w / init_snake_c, h}, Direction::Up, init_snake_l, 10);
+        Snake *s = new Snake({i * field_w / init_snake_c, h}, Direction::Up, init_snake_l, 30);
         _field.snakes.emplace_back(s);
     }
     for (Snake *snake: _field.snakes) {
@@ -58,10 +58,10 @@ bool Game::tick() {
 void Game::killPlayers() {
     for (Player *p: _players) {
         if (Snake *s = p->getSnake(); s->dead) {
-            delete s;
             _field.snakes.erase(std::find(_field.snakes.begin(), _field.snakes.end(), s));
-            delete p;
+            delete s;
             _players.erase(std::find(_players.begin(), _players.end(), p));
+            delete p;
         }
     }
 }

@@ -1,4 +1,4 @@
-#include "Bomb.h"
+#include "../../include/artifact/Bomb.h"
 
 Bomb::Bomb(int x, int y, int radius): _point(x, y) {
     this->_radius = radius;

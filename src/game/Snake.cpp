@@ -1,11 +1,9 @@
-#include "../geometry/Point.h"
-#include "Snake.h"
+#include "../../include/geometry/Point.h"
+#include "../../include/game/Snake.h"
 
 #include <iostream>
-
-#include "../artifact/Invisible.h"
-#include "../util/Utils.h"
-#include "../geometry/Direction.h"
+#include "../../include/util/Utils.h"
+#include "../../include/geometry/Direction.h"
 
 Snake::Snake(Point point, Direction direction, int length, int growthSpeed) {
     this->points = std::vector<Point>();

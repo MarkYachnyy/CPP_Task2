@@ -1,9 +1,9 @@
 
-#include "SimpleSurvivorBot.h"
+#include "../../include/player/SimpleSurvivorBot.h"
 
 #include <iostream>
 
-#include "../util/Utils.h"
+#include "../../include/util/Utils.h"
 
 SimpleSurvivorBot::SimpleSurvivorBot(Snake *_snake, Field *field, int visionRange): _snake(_snake), _field(field), _visionRange(visionRange) {
 

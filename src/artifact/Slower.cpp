@@ -1,4 +1,4 @@
-#include "Slower.h"
+#include "../../include/artifact/Slower.h"
 
 Slower::Slower(int x, int y, int strength): _point(x, y) {
     this->_strength = strength;

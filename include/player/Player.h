@@ -1,8 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#pragma once
 #include "../game/Field.h"
-#include "../game/Snake.h"
+#include "../../include/game/Snake.h"
 
 class Player {
 public:

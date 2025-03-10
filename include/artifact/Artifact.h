@@ -1,7 +1,7 @@
 //
 // Created by marky on 28.02.2025.
 //
-
+#pragma once
 #include <string>
 #ifndef ARTIFACT_H
 #define ARTIFACT_H

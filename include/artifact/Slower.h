@@ -4,7 +4,7 @@
 
 #ifndef SLOWER_H
 #define SLOWER_H
-#include "Artifact.cpp"
+#include "Artifact.h"
 
 class Slower: public Artifact {
     Point _point;

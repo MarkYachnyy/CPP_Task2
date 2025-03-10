@@ -1,4 +1,4 @@
-#include "Invisible.h"
+#include "../../include/artifact/Invisible.h"
 
 Invisible::Invisible(int x, int y, int strength): _point(x, y) {
     this->_strength = strength;

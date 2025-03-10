@@ -4,7 +4,7 @@
 
 #ifndef SIMPLESURVIVORBOT_H
 #define SIMPLESURVIVORBOT_H
-#include "Player.cpp"
+#include "Player.h"
 #include "../game/Snake.h"
 #include "../game/Field.h"
 
