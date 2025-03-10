@@ -4,6 +4,8 @@ project(Task2)
 set(CMAKE_CXX_STANDARD 20)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc")
 
+add_subdirectory(googletest)
+
 add_executable(Task2 src/main.cpp
         include/game/Snake.h
         include/geometry/Point.h
@@ -27,4 +29,16 @@ add_executable(Task2 src/main.cpp
         src/artifact/Bomb.cpp
         src/artifact/Slower.cpp)
 
-include_directories(include)
+include_directories(include/game)
+include_directories(include/geometry)
+include_directories(include/player)
+include_directories(include/util)
+include_directories(include/artifact)
+
+add_executable(tests tests/tests.cpp
+        include/game/Snake.h
+        include/geometry/Point.h
+        src/game/Snake.cpp
+        src/geometry/Point.cpp)
+
+target_link_libraries(tests gtest)

@@ -1,6 +1,4 @@
-
 #include "../../include/player/SimpleSurvivorBot.h"
-
 #include <iostream>
 
 #include "../../include/util/Utils.h"
