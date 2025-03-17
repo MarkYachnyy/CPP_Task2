@@ -58,6 +58,7 @@ add_executable(tests tests/tests.cpp
         include/util/symbols.h
         src/artifact/Bomb.cpp
         src/artifact/Slower.cpp
-        include/game/SnakeStateNames.h)
+        include/game/SnakeStateNames.h
+)
 
 target_link_libraries(tests gtest)

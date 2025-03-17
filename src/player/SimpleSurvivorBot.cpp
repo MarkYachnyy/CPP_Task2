@@ -1,8 +1,7 @@
-#include "../../include/player/SimpleSurvivorBot.h"
-#include <iostream>
+#include "SimpleSurvivorBot.h"
 
 #include "SnakeStateNames.h"
-#include "../../include/util/Utils.h"
+#include "Utils.h"
 
 SimpleSurvivorBot::SimpleSurvivorBot(Snake *_snake, Field *field, int visionRange): _snake(_snake), _field(field), _visionRange(visionRange) {
 
@@ -33,13 +32,17 @@ void SimpleSurvivorBot::turn() {
                 }
             }
         }
+        _snake->move();
         return;
     }
     Direction dir_left = counterClockWise(_snake->direction);
     Direction dir_right = clockWise(_snake->direction);
     int s_left = freeSpace(dir_left);
     int s_right = freeSpace(dir_right);
-    if (s_left == 0 && s_right == 0) return;
+    if (s_left == 0 && s_right == 0) {
+        _snake->move();
+        return;
+    }
     if (s_right > s_left) {
         _snake->direction = dir_right;
     } else if (s_left > s_right){
@@ -47,6 +50,7 @@ void SimpleSurvivorBot::turn() {
     } else {
         _snake->direction = randInt(0, 2) > 0 ? dir_left : dir_right;
     }
+    _snake->move();
 }
 
 int SimpleSurvivorBot::freeSpace(Direction direction) {

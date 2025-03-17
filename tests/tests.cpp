@@ -7,6 +7,7 @@
 #include "Invisible.h"
 #include "Slower.h"
 #include "Game.h"
+#include "SnakeStateNames.h"
 
 TEST(SnakeTest, CreationTest1) {
     int x = randInt(-10, 10);
@@ -102,7 +103,7 @@ TEST(ArtifactTest, InvisibleTest) {
 
     Snake snake1(std::vector<Point>{{x, y}}, Direction::Left, 5, 5);
     Snake snake2(std::vector<Point>{{x, y}}, Direction::Left, 5,5);
-    snake2.invisibleMoves = s;
+    snake2.setProperty(INVISIBLE, s);
     Invisible i(1,1, s);
     i.use(&snake1);
 
@@ -114,8 +115,8 @@ TEST(ArtifactTest, SlowerTest) {
     int y = randInt(-10, 10);
     int s = randInt(2, 10);
 
-    Snake snake1(std::vector<Point>{{x, y}}, Direction::Left, 5, 5);
-    Snake snake2(std::vector<Point>{{x, y}}, Direction::Left, 5 + s,5);
+    Snake snake1(std::vector<Point>{{x, y}}, Direction::Left, 5, 2);
+    Snake snake2(std::vector<Point>{{x, y}}, Direction::Left, 5,2+s);
     Slower i(1,1, s);
     i.use(&snake1);
 
@@ -127,8 +128,8 @@ TEST(GameTest, CollisionTest) {
     int h = randInt(20,30);
     int l = randInt(3, 6);
 
-    Game game1(w, h, 0, 0, 2);
-    Game game2(w, h, 0, 0, 2);
+    Game game1(w, h, 0, 0,0, 2);
+    Game game2(w, h, 0, 0,0, 2);
 
     game1.addSnake(new Snake(Point(w/2, h/2), Direction::Left, l, 10));
     game2.addSnake(new Snake(Point(w/2, h/2), Direction::Left, l, 10));
@@ -140,7 +141,7 @@ TEST(GameTest, CollisionTest) {
     game2.addSnake(new Snake(Point(w/2+l-1, h/2), Direction::Up, l, 10));
 
      for (Snake* s: game1._field.snakes) {
-         s->dead = true;
+         s->setProperty(DEAD, 1);
      }
 
     game2.countCollisions();
@@ -153,8 +154,8 @@ TEST(GameTest, OutOfBoundsTest) {
     int h = randInt(20,30);
     int l = randInt(3, 6);
 
-    Game game1(w, h, 0, 0, 2);
-    Game game2(w, h, 0, 0, 2);
+    Game game1(w, h, 0, 0,0, 2);
+    Game game2(w, h, 0, 0,0, 2);
 
     game1.addSnake(new Snake(Point(w/2,-1), Direction::Up, l, 10));
     game2.addSnake(new Snake(Point(w/2,-1), Direction::Up, l, 10));
@@ -169,7 +170,7 @@ TEST(GameTest, OutOfBoundsTest) {
     game2.addSnake(new Snake(Point(w/2, h), Direction::Down, l, 10));
 
     for (Snake* s: game1._field.snakes) {
-        s->dead = true;
+        s->setProperty(DEAD, true);
     }
 
     game2.countCollisions();
@@ -181,7 +182,7 @@ TEST(PlayerTest, BordersDodgeTest) {
     int w = randInt(20,30);
     int h = randInt(20,30);
     int l = randInt(3, 6);
-    Game game1(w, h, 0, 0, 2);
+    Game game1(w, h, 0, 0,0, 2);
 
     bool res = true;
 

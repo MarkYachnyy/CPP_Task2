@@ -1,14 +1,14 @@
 #include <algorithm>
-#include "../../include/game/Game.h"
-#include "../../include/player/SimpleSurvivorBot.h"
-#include "../../include/util/Utils.h"
+#include "Game.h"
+#include "SimpleSurvivorBot.h"
+#include "Utils.h"
 #include <string>
 
 #include "SnakeStateNames.h"
-#include "../../include/artifact/Invisible.h"
-#include "../../include/artifact/Bomb.h"
-#include "../../include/artifact/Slower.h"
-#include "../../include/util/symbols.h"
+#include "Invisible.h"
+#include "Bomb.h"
+#include "Slower.h"
+#include "symbols.h"
 
 Game::Game(int field_w, int field_h, int artifactSpawnRatePercent, int init_snake_c, int init_snake_l,
            int snake_growth_s): Game(
@@ -59,9 +59,6 @@ Game::~Game() {
 bool Game::tick() {
     for (Player *player: _players) {
         player->turn();
-    }
-    for (Snake *snake: _field.snakes) {
-        snake->move();
     }
     if (randInt(0, 100) < _artifactSpawnRate) {
         addArtifact(createRandomArtifact());
