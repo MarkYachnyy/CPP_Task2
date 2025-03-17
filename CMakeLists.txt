@@ -38,7 +38,24 @@ include_directories(include/artifact)
 add_executable(tests tests/tests.cpp
         include/game/Snake.h
         include/geometry/Point.h
+        include/game/Field.h
+        include/artifact/Artifact.h
+        include/artifact/Bomb.h
+        include/artifact/Slower.h
+        include/artifact/Invisible.h
+        src/game/Field.cpp
         src/game/Snake.cpp
-        src/geometry/Point.cpp)
+        include/util/Utils.h
+        include/geometry/Direction.h
+        src/geometry/Point.cpp
+        src/game/Game.cpp
+        include/game/Game.h
+        src/player/SimpleSurvivorBot.cpp
+        include/player/SimpleSurvivorBot.h
+        include/player/Player.h
+        src/artifact/Invisible.cpp
+        include/util/symbols.h
+        src/artifact/Bomb.cpp
+        src/artifact/Slower.cpp)
 
 target_link_libraries(tests gtest)

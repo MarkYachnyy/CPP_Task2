@@ -18,6 +18,26 @@ Field::~Field() {
     }
 }
 
+bool Field::operator==(const Field &other) const {
+    if (this->_width != other._width || this->_height != other._height) {
+        return false;
+    }
+    if (this->snakes.size() != other.snakes.size()) {
+        return false;
+    }
+    if (this->artifacts.size() != other.artifacts.size()) {
+        return false;
+    }
+    for (int i = 0; i < this->snakes.size(); ++i) {
+        Snake* s1 = this->snakes[i];
+        Snake* s2 = other.snakes[i];
+        if (*s1 != *s2) {
+            return false;
+        }
+    }
+    return true;
+}
+
 int Field::getHeight() const {
     return _height;
 }

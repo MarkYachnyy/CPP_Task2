@@ -14,6 +14,7 @@ class Field {
 public:
     Field(int width, int height);
     ~Field();
+    bool operator==(const Field &other) const;
 
     int getWidth() const;
     int getHeight() const;

@@ -8,11 +8,12 @@
 #include "../../include/artifact/Slower.h"
 #include "../../include/util/symbols.h"
 
-Game::Game(int field_w, int field_h, int artifactSpawnRatePercent, int init_snake_c, int init_snake_l):
-    Game(field_w, field_h, artifactSpawnRatePercent, init_snake_c, init_snake_l, 20, 10, 5){
+Game::Game(int field_w, int field_h, int artifactSpawnRatePercent, int init_snake_c, int init_snake_l): Game(
+    field_w, field_h, artifactSpawnRatePercent, init_snake_c, init_snake_l, 20, 10, 5) {
 }
 
-Game::Game(int field_w, int field_h, int artifactSpawnRatePercent, int init_snake_c, int init_snake_l, int invisibleStrength, int slowerStrength, int bombRadius) : _field(
+Game::Game(int field_w, int field_h, int artifactSpawnRatePercent, int init_snake_c, int init_snake_l,
+           int invisibleStrength, int slowerStrength, int bombRadius) : _field(
     field_w, field_h) {
     _artifactSpawnRate = artifactSpawnRatePercent;
     _players = std::vector<Player *>();
@@ -20,10 +21,11 @@ Game::Game(int field_w, int field_h, int artifactSpawnRatePercent, int init_snak
     int h = (field_h - init_snake_l) / 2;
     for (int i = 0; i < init_snake_c; ++i) {
         Snake *s = new Snake({i * field_w / init_snake_c, h}, Direction::Up, init_snake_l, 30);
-        _field.snakes.emplace_back(s);
+        addSnake(s);
     }
     for (Snake *snake: _field.snakes) {
-        _players.emplace_back(new SimpleSurvivorBot(snake, &_field, 3));
+        Player *p = new SimpleSurvivorBot(snake, &_field, 3);
+        addPlayer(p);
     }
 
     _bombRadius = bombRadius;
@@ -31,6 +33,17 @@ Game::Game(int field_w, int field_h, int artifactSpawnRatePercent, int init_snak
     _slowerStrength = slowerStrength;
 }
 
+void Game::addArtifact(Artifact *artifact) {
+    _field.artifacts.emplace_back(artifact);
+}
+
+void Game::addPlayer(Player *player) {
+    _players.emplace_back(player);
+}
+
+void Game::addSnake(Snake *snake) {
+    _field.snakes.emplace_back(snake);
+}
 
 Game::~Game() {
     for (Player *p: _players) {
@@ -47,7 +60,7 @@ bool Game::tick() {
         snake->move();
     }
     if (randInt(0, 100) < _artifactSpawnRate) {
-        createRandomArtifact();
+        addArtifact(createRandomArtifact());
     }
     applyArtifacts();
     countCollisions();
@@ -56,46 +69,49 @@ bool Game::tick() {
 }
 
 void Game::killPlayers() {
+    std::vector<Snake*> newSnakes;
+    std::vector<Player*> newPlayers;
     for (Player *p: _players) {
-        if (Snake *s = p->getSnake(); s->dead) {
-            _field.snakes.erase(std::find(_field.snakes.begin(), _field.snakes.end(), s));
+        Snake *s = p->getSnake();
+        if (s->dead) {
             delete s;
-            _players.erase(std::find(_players.begin(), _players.end(), p));
             delete p;
+        } else {
+            newSnakes.emplace_back(s);
+            newPlayers.emplace_back(p);
         }
     }
+    _players = newPlayers;
+    _field.snakes = newSnakes;
 }
 
 
 void Game::countCollisions() {
-    std::vector<Snake *> snakes_to_kill;
-    std::vector<Player *> bots_to_kill;
-    for (Player *p: _players) {
-        Snake *playersSnake = p->getSnake();
+    for (Snake *playersSnake: _field.snakes) {
         if (playersSnake->head().x < 0 || playersSnake->head().x >= _field.getWidth() ||
             playersSnake->head().y < 0 || playersSnake->head().y >= _field.getHeight()) {
             playersSnake->dead = true;
+            continue;
         }
-        for (Snake *s: _field.snakes) {
-            if (s == playersSnake) {
-                if (s->containsPoint(s->head()) > 1) {
-                    if (s->invisibleMoves <= 0) {
-                        playersSnake->dead = true;
-                        break;
-                    }
-                }
+        if (playersSnake->containsPoint(playersSnake->head()) > 1) {
+            if (playersSnake->invisibleMoves <= 0) {
+                playersSnake->dead = true;
                 continue;
             }
-            if (s->containsPoint(playersSnake->head())) {
-                playersSnake->dead = true;
-                break;
+        }
+        for (Snake *s: _field.snakes) {
+            if (s != playersSnake) {
+                if (s->containsPoint(playersSnake->head())) {
+                    playersSnake->dead = true;
+                    break;
+                }
             }
         }
     }
 }
 
 void Game::applyArtifacts() {
-    std::vector<Artifact*> to_erase;
+    std::vector<Artifact *> to_erase;
     for (Artifact *a: _field.artifacts) {
         bool used = false;
         for (Snake *s: _field.snakes) {
@@ -118,13 +134,13 @@ void Game::applyArtifacts() {
             to_erase.emplace_back(a);
         }
     }
-    for (Artifact* a: to_erase) {
+    for (Artifact *a: to_erase) {
         delete a;
         _field.artifacts.erase(std::find(_field.artifacts.begin(), _field.artifacts.end(), a));
     }
 }
 
-void Game::createRandomArtifact() {
+Artifact *Game::createRandomArtifact() {
     Point p(0, 0);
     do {
         p = Point(randInt(0, _field.getWidth()), randInt(0, _field.getHeight()));
@@ -147,7 +163,7 @@ void Game::createRandomArtifact() {
             break;
         }
     }
-    _field.artifacts.push_back(artifact);
+    return artifact;
 }
 
 std::string Game::print() {
@@ -172,9 +188,9 @@ std::string Game::print() {
             for (Artifact *a: _field.artifacts) {
                 if (a->getPoint().x == j && a->getPoint().y == i) {
                     artifact = true;
-                    if (a->getName()=="invisible") {
+                    if (a->getName() == "invisible") {
                         c += CYAN;
-                    } else if (a->getName()=="bomb"){
+                    } else if (a->getName() == "bomb") {
                         c += RED;
                     } else {
                         c += PURPLE;
