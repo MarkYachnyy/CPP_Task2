@@ -3,14 +3,14 @@
 #include "SnakeStateNames.h"
 #include "Utils.h"
 
-SimpleSurvivorBot::SimpleSurvivorBot(Snake *_snake, Field *field, int visionRange): _snake(_snake), _field(field), _visionRange(visionRange) {
-
+SimpleSurvivorBot::SimpleSurvivorBot(Snake *_snake, Field *field, int visionRange): _snake(_snake), _field(field),
+    _visionRange(visionRange) {
 }
 
 SimpleSurvivorBot::~SimpleSurvivorBot() = default;
 
 
-Snake* SimpleSurvivorBot::getSnake() {
+Snake *SimpleSurvivorBot::getSnake() {
     return _snake;
 }
 
@@ -32,7 +32,6 @@ void SimpleSurvivorBot::turn() {
                 }
             }
         }
-        _snake->move();
         return;
     }
     Direction dir_left = counterClockWise(_snake->direction);
@@ -40,17 +39,15 @@ void SimpleSurvivorBot::turn() {
     int s_left = freeSpace(dir_left);
     int s_right = freeSpace(dir_right);
     if (s_left == 0 && s_right == 0) {
-        _snake->move();
         return;
     }
     if (s_right > s_left) {
         _snake->direction = dir_right;
-    } else if (s_left > s_right){
+    } else if (s_left > s_right) {
         _snake->direction = dir_left;
     } else {
         _snake->direction = randInt(0, 2) > 0 ? dir_left : dir_right;
     }
-    _snake->move();
 }
 
 int SimpleSurvivorBot::freeSpace(Direction direction) {
@@ -60,7 +57,8 @@ int SimpleSurvivorBot::freeSpace(Direction direction) {
     p.y += inc.y;
     int res = 0;
     int i = 1;
-    while (i <= _visionRange && !isAnObstacle(p) && !(_snake->containsPoint(p) && _snake->getProperty(INVISIBLE) <= i)) {
+    while (i <= _visionRange && !isAnObstacle(p) && !(
+               _snake->containsPoint(p) && _snake->getProperty(INVISIBLE) <= i)) {
         i++;
         res++;
         p.x += inc.x;
@@ -76,17 +74,14 @@ bool SimpleSurvivorBot::isAnObstacle(Point &p) {
     if (p.y < 0 || p.y >= _field->getHeight()) {
         return true;
     }
-    for (Snake* s: _field->snakes) {
+    for (Snake *s: _field->snakes) {
         if (s == _snake) continue;
         if (s->containsPoint(p)) return true;
     }
-    for (Artifact* a: _field->artifacts) {
+    for (Artifact *a: _field->artifacts) {
         if (a->getName() == "bomb" && a->getPoint().x == p.x && a->getPoint().y == p.y) {
             return true;
         }
     }
     return false;
 }
-
-
-

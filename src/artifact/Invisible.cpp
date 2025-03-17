@@ -1,4 +1,4 @@
-#include "../../include/artifact/Invisible.h"
+#include "Invisible.h"
 
 #include "SnakeStateNames.h"
 

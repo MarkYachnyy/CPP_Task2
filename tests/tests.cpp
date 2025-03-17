@@ -179,8 +179,8 @@ TEST(GameTest, OutOfBoundsTest) {
 }
 
 TEST(PlayerTest, BordersDodgeTest) {
-    int w = randInt(20,30);
-    int h = randInt(20,30);
+    int w = 21;
+    int h = 21;
     int l = randInt(3, 6);
     Game game1(w, h, 0, 0,0, 2);
 

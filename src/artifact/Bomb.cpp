@@ -1,4 +1,4 @@
-#include "../../include/artifact/Bomb.h"
+#include "Bomb.h"
 
 #include "SnakeStateNames.h"
 

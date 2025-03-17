@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 #include "Direction.h"
-#include "../geometry/Point.h"
+#include "Point.h"
 
 class Snake {
 

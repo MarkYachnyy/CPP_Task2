@@ -1,7 +1,7 @@
 #ifndef INVISIBLE_H
 #define INVISIBLE_H
 #include "Artifact.h"
-#include "../geometry/Point.h"
+#include "Point.h"
 
 
 class Invisible: public Artifact {

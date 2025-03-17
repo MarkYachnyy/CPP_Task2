@@ -60,6 +60,9 @@ bool Game::tick() {
     for (Player *player: _players) {
         player->turn();
     }
+    for (Snake* snake: _field.snakes) {
+        snake->move();
+    }
     if (randInt(0, 100) < _artifactSpawnRate) {
         addArtifact(createRandomArtifact());
     }

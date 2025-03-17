@@ -3,7 +3,7 @@
 #include <string>
 
 #include "Field.h"
-#include "../player/SimpleSurvivorBot.h"
+#include "SimpleSurvivorBot.h"
 
 
 class Game {

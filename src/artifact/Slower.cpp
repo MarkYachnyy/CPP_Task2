@@ -1,4 +1,4 @@
-#include "../../include/artifact/Slower.h"
+#include "Slower.h"
 
 #include "SnakeStateNames.h"
 

@@ -2,8 +2,8 @@
 #define PLAYER_H
 
 #pragma once
-#include "../game/Field.h"
-#include "../../include/game/Snake.h"
+#include "Field.h"
+#include "Snake.h"
 
 class Player {
 public:

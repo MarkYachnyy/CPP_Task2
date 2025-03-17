@@ -3,8 +3,8 @@
 #include <cstdlib>
 #include <Windows.h>
 
-#include "../include/util/Utils.h"
-#include "../include/game/Game.h"
+#include "Utils.h"
+#include "Game.h"
 
 
 int main() {

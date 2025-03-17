@@ -5,8 +5,8 @@
 #ifndef SIMPLESURVIVORBOT_H
 #define SIMPLESURVIVORBOT_H
 #include "Player.h"
-#include "../game/Snake.h"
-#include "../game/Field.h"
+#include "Snake.h"
+#include "Field.h"
 
 
 class SimpleSurvivorBot: public Player{

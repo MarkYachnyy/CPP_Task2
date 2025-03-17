@@ -1,4 +1,4 @@
-#include "../../include/game/Game.h"
+#include "Game.h"
 
 #include <ostream>
 

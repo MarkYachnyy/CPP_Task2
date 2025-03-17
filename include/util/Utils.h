@@ -1,6 +1,6 @@
 #pragma once
-#include "../geometry/Direction.h"
-#include "../geometry/Point.h"
+#include "Direction.h"
+#include "Point.h"
 #include <ctime>
 #include <cstdlib>
 
