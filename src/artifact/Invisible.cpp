@@ -1,11 +1,13 @@
 #include "../../include/artifact/Invisible.h"
 
+#include "SnakeStateNames.h"
+
 Invisible::Invisible(int x, int y, int strength): _point(x, y) {
     this->_strength = strength;
 }
 
 void Invisible::use(Snake *snake) {
-    snake->invisibleMoves = _strength;
+    snake->setProperty(INVISIBLE, _strength);
 }
 
 Point Invisible::getPoint() {

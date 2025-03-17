@@ -27,7 +27,8 @@ add_executable(Task2 src/main.cpp
         src/artifact/Invisible.cpp
         include/util/symbols.h
         src/artifact/Bomb.cpp
-        src/artifact/Slower.cpp)
+        src/artifact/Slower.cpp
+        include/game/SnakeStateNames.h)
 
 include_directories(include/game)
 include_directories(include/geometry)
@@ -56,6 +57,7 @@ add_executable(tests tests/tests.cpp
         src/artifact/Invisible.cpp
         include/util/symbols.h
         src/artifact/Bomb.cpp
-        src/artifact/Slower.cpp)
+        src/artifact/Slower.cpp
+        include/game/SnakeStateNames.h)
 
 target_link_libraries(tests gtest)

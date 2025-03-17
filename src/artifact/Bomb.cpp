@@ -1,11 +1,13 @@
 #include "../../include/artifact/Bomb.h"
 
+#include "SnakeStateNames.h"
+
 Bomb::Bomb(int x, int y, int radius): _point(x, y) {
     this->_radius = radius;
 }
 
 void Bomb::use(Snake *snake) {
-    snake->dead = true;
+    snake->setProperty(DEAD, 1);
 }
 
 Point Bomb::getPoint() {

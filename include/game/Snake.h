@@ -2,6 +2,8 @@
 #ifndef SNAKE_H
 #define SNAKE_H
 
+#include <map>
+#include <string>
 #include <vector>
 #include "Direction.h"
 #include "../geometry/Point.h"
@@ -16,15 +18,16 @@ public:
     bool operator==(const Snake &) const = default;
 
     Direction direction;
-    bool dead;
-    int invisibleMoves;
-    int growthSpeed;
 
     void move();
     Point& head();
     int containsPoint(Point& point);
+
+    int getProperty(std::string& name);
+    void setProperty(std::string& name, int value);
+    int decrementProperty(std::string& name);
 private:
-    int movesToGrowth;
+    std::map<std::string, int> properties;
     std::vector<Point> _points;
 
     void moveHead();

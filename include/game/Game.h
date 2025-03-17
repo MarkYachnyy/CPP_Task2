@@ -17,8 +17,8 @@ class Game {
     Artifact* createRandomArtifact();
 
 public:
-    Game(int field_w, int field_h, int artifactSpawnRatePercent,  int init_snake_c, int init_snake_l);
-    Game(int field_w, int field_h, int artifactSpawnRatePercent, int init_snake_c, int init_snake_l, int invisibleStrength, int slowerStrength, int bombRadius);
+    Game(int field_w, int field_h, int artifactSpawnRatePercent,  int init_snake_c, int init_snake_l, int snake_growth_s);
+    Game(int field_w, int field_h, int artifactSpawnRatePercent, int init_snake_c, int init_snake_l, int snake_growth_s, int invisibleStrength, int slowerStrength, int bombRadius);
     ~Game();
     Field _field;
 

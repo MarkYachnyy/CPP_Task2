@@ -1,6 +1,7 @@
 #include "../../include/player/SimpleSurvivorBot.h"
 #include <iostream>
 
+#include "SnakeStateNames.h"
 #include "../../include/util/Utils.h"
 
 SimpleSurvivorBot::SimpleSurvivorBot(Snake *_snake, Field *field, int visionRange): _snake(_snake), _field(field), _visionRange(visionRange) {
@@ -55,7 +56,7 @@ int SimpleSurvivorBot::freeSpace(Direction direction) {
     p.y += inc.y;
     int res = 0;
     int i = 1;
-    while (i <= _visionRange && !isAnObstacle(p) && !(_snake->containsPoint(p) && _snake->invisibleMoves <= i)) {
+    while (i <= _visionRange && !isAnObstacle(p) && !(_snake->containsPoint(p) && _snake->getProperty(INVISIBLE) <= i)) {
         i++;
         res++;
         p.x += inc.x;
